@@ -1,0 +1,56 @@
+{
+"storage"
+],
+"host_permissions": ["<all_urls>"],
+"background": {
+"service_worker": "background.js"
+},
+"action": {
+"default_popup": "options.html",
+"default_title": "Privacy Fingerprint Spoofer"
+},
+"content_scripts": [
+{
+"matches": ["<all_urls>"],
+"js": ["content.js"],
+"run_at": "document_start"
+}
+],
+"icons": {
+"16": "icons/icon16.png",
+"48": "icons/icon48.png",
+"128": "icons/icon128.png"
+}
+}
+
+
+--- FILE: background.js ---
+// background service worker - currently used for future messaging and storage sync
+chrome.runtime.onInstalled.addListener(() => {
+// set default config if not present
+chrome.storage.local.get(['config'], (res) => {
+if (!res.config) {
+chrome.storage.local.set({
+config: {
+modules: {
+canvas: true,
+webgl: true,
+audio: true,
+screen: true,
+navigator: true
+},
+strength: 'medium', // low | medium | high
+seed: null
+}
+});
+}
+});
+});
+
+
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+if (msg && msg.type === 'getConfig') {
+chrome.storage.local.get(['config'], (res) => sendResponse(res.config || {}));
+return true; // keep channel open for async
+}
+});
