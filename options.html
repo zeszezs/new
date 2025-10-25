@@ -1,0 +1,35 @@
+<!doctype html>
+<option value="low">Low (minimal)</option>
+<option value="medium">Medium (balanced)</option>
+<option value="high">High (aggressive)</option>
+</select>
+</label>
+
+
+<div class="modules">
+<label class="module"><input type="checkbox" id="m_canvas"> Canvas</label>
+<label class="module"><input type="checkbox" id="m_webgl"> WebGL</label>
+<label class="module"><input type="checkbox" id="m_audio"> Audio</label>
+<label class="module"><input type="checkbox" id="m_screen"> Screen</label>
+<label class="module"><input type="checkbox" id="m_nav"> Navigator</label>
+</div>
+
+
+<label>Seed (optional) <input id="seed" placeholder="leave blank for random"></label>
+
+
+<p>
+<button id="save">Save</button>
+<span id="status" style="margin-left:12px"></span>
+</p>
+
+
+<p style="font-size:0.9em;color:#555">Note: This extension modifies page-level JavaScript APIs by injecting a script. Some websites (especially ones that heavily rely on precise GPU/WebGL info or canvas output) may not work correctly when aggressive spoofing is enabled.</p>
+
+
+</div>
+
+
+<script src="options.js"></script>
+</body>
+</html>
